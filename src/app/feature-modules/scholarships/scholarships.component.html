@@ -1,0 +1,30 @@
+<div class="container-fluid mb-3">
+  <mat-tab-group [(selectedIndex)]="activeTabIndex">
+    <mat-tab label="Sponsors">
+      <ng-template mat-tab-label>
+        <mat-icon>people </mat-icon>
+        <label class="margin-hr-8">Sponsors</label>
+        <button class="secondary-btn">+</button>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Students">
+      <ng-template mat-tab-label>
+        <mat-icon>school </mat-icon>
+        <label class="margin-hr-8">Students</label>
+        <button class="secondary-btn">+</button>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div *ngIf="activeTabIndex === 0">
+        <app-sponsors></app-sponsors>
+      </div>
+      <div *ngIf="activeTabIndex === 1">
+        <app-scholars></app-scholars>
+      </div>
+    </div>
+  </div>
+</div>

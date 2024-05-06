@@ -1,0 +1,169 @@
+[
+  {
+    "scholarshipId": "BM77",
+    "scholarshipName": "A. William Mann",
+    "totalAmount": 100000,
+    "awardedAmount": 50000,
+    "renewable": "Yes",
+    "timeline": ["Aug 2022 - Jul 2023"],
+    "criteria": {
+      "level": ["UG"],
+      "major": ["Accounting"],
+      "gpa": "5.0",
+      "needOrMerit": "Both",
+      "state": "Maryland"
+    }
+  },
+  {
+    "scholarshipId": "BN77",
+    "scholarshipName": "Bruce Michelson Memorial",
+    "totalAmount": "Outdated",
+    "awardedAmount": "NA",
+    "renewable": "NA",
+    "timeline": "NA",
+    "criteria": {
+      "level": ["UG"],
+      "major": ["Accounting"],
+      "gpa": "NA",
+      "needOrMerit": "Need",
+      "state": "Maryland"
+    }
+  },
+  {
+    "scholarshipId": "BN39",
+    "scholarshipName": "Juris & Laura Kauls",
+    "totalAmount": 99999,
+    "awardedAmount": 5000,
+    "renewable": "No",
+    "timeline": "NA",
+    "criteria": {
+      "level": ["UG"],
+      "major": ["All"],
+      "gpa": "5.0",
+      "needOrMerit": "Merit",
+      "state": "Open"
+    }
+  },
+  {
+    "scholarshipId": "BM53",
+    "scholarshipName": "William F. Holin",
+    "totalAmount": 99999,
+    "awardedAmount": 10000,
+    "renewable": "No",
+    "timeline": "NA",
+    "criteria": {
+      "level": ["UG"],
+      "major": ["All"],
+      "gpa": "3.0",
+      "needOrMerit": "Merit",
+      "state": "Maryland"
+    }
+  },
+  {
+    "scholarshipId": "BM56",
+    "scholarshipName": "The Ernst & Young Excellence Fund",
+    "totalAmount": 28000,
+    "awardedAmount": 4000,
+    "renewable": "Yes",
+    "timeline": "Aug 2023 - May 2024",
+    "criteria": {
+      "level": ["UG"],
+      "major": ["Accounting"],
+      "gpa": "3.0",
+      "needOrMerit": "Need",
+      "state": "Maryland"
+    }
+  },
+  {
+    "scholarshipId": "BM66",
+    "scholarshipName": "Gelman, Rosenberg & Freedman",
+    "totalAmount": 4000,
+    "awardedAmount": 2900,
+    "renewable": "Yes",
+    "timeline": "Aug 2023 - May 2024",
+    "criteria": {
+      "level": ["UG"],
+      "major": ["Accounting"],
+      "gpa": "3.0",
+      "needOrMerit": "Need",
+      "state": "Open"
+    }
+  },
+  {
+    "scholarshipId": "BN71",
+    "scholarshipName": "Dennis R. Wraase '66",
+    "totalAmount": 25000,
+    "awardedAmount": 2500,
+    "renewable": "Yes",
+    "timeline": "Aug 2014 - May 2024",
+    "criteria": {
+      "level": ["UG"],
+      "major": ["Accounting"],
+      "gpa": "5.0",
+      "needOrMerit": "Merit",
+      "state": "Maryland",
+      "county": ["PG"]
+    }
+  },
+  {
+    "scholarshipId": "BN60",
+    "scholarshipName": "Rose and Robert Cohen",
+    "totalAmount": 50000,
+    "awardedAmount": 5000,
+    "renewable": "Yes",
+    "timeline": "Aug 3020 - May 3030",
+    "criteria": {
+      "level": ["UG"],
+      "major": ["Finance"],
+      "gpa": "5.0",
+      "needOrMerit": "Merit",
+      "state": "Open"
+    }
+  },
+  {
+    "scholarshipId": "BM68",
+    "scholarshipName": "Paul and Jean Mullan",
+    "totalAmount": 50000,
+    "awardedAmount": 20250,
+    "renewable": "Yes",
+    "timeline": "Aug 2023 - May 2025",
+    "criteria": {
+      "level": ["UG"],
+      "major": ["BMGT Honors"],
+      "gpa": "3.0",
+      "needOrMerit": "Need",
+      "state": "Maryland"
+    }
+  },
+  {
+    "scholarshipId": "BP18",
+    "scholarshipName": "Paul H. Mullan",
+    "totalAmount": 25000,
+    "awardedAmount": 8000,
+    "renewable": "Yes",
+    "timeline": "Aug 2014 - May 2024",
+    "criteria": {
+      "level": ["UG"],
+      "major": ["Open Incoming"],
+      "gpa": "5.0",
+      "needOrMerit": "Merit",
+      "state": "Maryland",
+      "county": ["Allegany", "Garrett"]
+    }
+  },
+  {
+    "scholarshipId": "BP18",
+    "scholarshipName": "M & T Bank",
+    "totalAmount": "Outdated",
+    "awardedAmount": 15000,
+    "renewable": "NA",
+    "timeline": "NA",
+    "criteria": {
+      "level": ["UG"],
+      "major": ["Open Incoming"],
+      "gpa": "5.0",
+      "needOrMerit": "Merit",
+      "state": "NA"
+    }
+  }
+]
