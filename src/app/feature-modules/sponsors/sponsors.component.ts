@@ -8,6 +8,7 @@ import { ISponsorshipDetails } from '../../interfaces/i-sponsorship-details';
 import { AllApisService } from '../../services/all-apis.service';
 import { ApplicationConstants } from '../../../assets/constants/application-constants';
 import { CommonModule } from '@angular/common';
+import { NewSponsorComponent } from '../new-sponsor/new-sponsor.component';
 
 @Component({
   selector: 'app-sponsors',
@@ -19,11 +20,13 @@ import { CommonModule } from '@angular/common';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    NewSponsorComponent
   ],
   templateUrl: './sponsors.component.html',
   styleUrl: './sponsors.component.scss',
 })
 export class SponsorsComponent implements OnInit {
+  addNewSponsorFlag: boolean = false;
   na: string = ApplicationConstants.NA_STRING;
   displayedColumns: string[] = Object.values(
     ApplicationConstants.SPONSOR_DETAILS

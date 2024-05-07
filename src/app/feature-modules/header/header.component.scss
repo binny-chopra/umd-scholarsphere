@@ -1,0 +1,10 @@
+.min-ht-64 {
+  min-height: 4rem;
+}
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}

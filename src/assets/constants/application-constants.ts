@@ -38,13 +38,24 @@ export class ApplicationConstants {
     STUDENT_MAJOR: 'studentMajor',
     NEED_OR_MERIT: 'needOrMerit',
     RESIDENCY: 'residency',
-    GPA: 'gpa'
+    GPA: 'gpa',
   };
 
   public static SCHOLAR_CRITERIA = {
     STUDENT_MAJOR: `criteria.${ApplicationConstants.SCHOLAR_DETAILS.STUDENT_MAJOR}`,
     NEED_OR_MERIT: `criteria.${ApplicationConstants.SCHOLAR_DETAILS.NEED_OR_MERIT}`,
     RESIDENCY: `criteria.${ApplicationConstants.SCHOLAR_DETAILS.RESIDENCY}`,
-    GPA: `criteria.${ApplicationConstants.SCHOLAR_DETAILS.GPA}`
+    GPA: `criteria.${ApplicationConstants.SCHOLAR_DETAILS.GPA}`,
   };
+
+  public static YES_NO: string[] = ['Yes', 'No'];
+  public static COURSE_LEVEL: string[] = ['UG', 'PG', 'PhD'];
+  public static NEED_MERIT: string[] = ['Need', 'Merit', 'Both'];
+  public static MAJORS: string[] = [
+    'All',
+    'Accounting',
+    'Supply Chain Management',
+    'Information Systems',
+    'Business Analytics',
+  ];
 }

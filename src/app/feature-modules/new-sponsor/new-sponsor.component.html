@@ -1,0 +1,261 @@
+<form [formGroup]="sponsorForm" (ngSubmit)="onSubmit()" class="mt-4">
+  <div class="row">
+    <div class="col-12 col-md-6 mb-3">
+      <div class="form-group">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="scholarshipId"
+            placeholder="Scholarship ID"
+            matLabel="Scholarship ID"
+          />
+          <mat-icon
+            *ngIf="sponsorForm.get('scholarshipId')?.value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="sponsorForm.get('scholarshipId')?.setValue('')"
+            >close</mat-icon
+          >
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <div class="form-group">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="scholarshipName"
+            placeholder="Scholarship Name"
+            matLabel="Scholarship Name"
+          />
+          <button
+            *ngIf="sponsorForm.get('scholarshipName')?.value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="sponsorForm.get('scholarshipName')?.setValue('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <div class="form-group">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="totalAmount"
+            placeholder="Total Amount"
+            matLabel="Total Amount"
+          />
+          <button
+            *ngIf="sponsorForm.get('totalAmount')?.value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="sponsorForm.get('totalAmount')?.setValue('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <div class="form-group">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="awardedAmount"
+            placeholder="Awarded Amount"
+            matLabel="Awarded Amount"
+          />
+          <button
+            *ngIf="sponsorForm.get('awardedAmount')?.value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="sponsorForm.get('awardedAmount')?.setValue('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-select
+            formControlName="renewable"
+            placeholder="Renewable"
+            id="renewable"
+            matLabel="Renewable"
+          >
+            <mat-option
+              *ngFor="let option of renewableOptions"
+              [value]="option"
+              >{{ option }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <div class="form-group">
+        <mat-form-field class="w-100">
+          <mat-date-range-input [rangePicker]="picker">
+            <input
+              formControlName="timeline"
+              matStartDate
+              id="startDate"
+              placeholder="Start date"
+            />
+            <input
+              formControlName="timeline"
+              matEndDate
+              id="endDate"
+              placeholder="End date"
+            />
+          </mat-date-range-input>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-select
+            formControlName="level"
+            placeholder="Level"
+            multiple
+            id="level"
+            matLabel="Level"
+          >
+            <mat-option *ngFor="let level of levelOptions" [value]="level">{{
+              level
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-select
+            formControlName="major"
+            id="major"
+            placeholder="Major"
+            matLabel="Major"
+            multiple
+          >
+            <mat-option *ngFor="let option of majorOptions" [value]="option">{{
+              option
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <div class="form-group">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="gpa"
+            placeholder="GPA"
+            id="gpa"
+            matLabel="GPA"
+          />
+          <button
+            *ngIf="sponsorForm.get('gpa')?.value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="sponsorForm.get('gpa')?.setValue('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-select
+            formControlName="needOrMerit"
+            id="needOrMerit"
+            placeholder="Need or Merit"
+            matLabel="Need or Merit"
+          >
+            <mat-option
+              *ngFor="let option of needMeritOptions"
+              [value]="option"
+              >{{ option }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <div class="form-group">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="state"
+            placeholder="State"
+            id="state"
+            matLabel="State"
+          />
+          <button
+            *ngIf="sponsorForm.get('state')?.value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="sponsorForm.get('state')?.setValue('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 mb-3">
+      <div class="form-group">
+        <mat-form-field>
+          <input
+            matInput
+            type="text"
+            formControlName="county"
+            placeholder="County"
+            id="county"
+            matLabel="County"
+          />
+          <button
+            *ngIf="sponsorForm.get('county')?.value"
+            matSuffix
+            mat-icon-button
+            aria-label="Clear"
+            (click)="sponsorForm.get('county')?.setValue('')"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 text-center">
+      <button type="submit" class="primary-btn submit-btn">Submit</button>
+    </div>
+  </div>
+</form>
