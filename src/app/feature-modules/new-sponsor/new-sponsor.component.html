@@ -7,14 +7,14 @@
             matInput
             type="text"
             formControlName="scholarshipId"
-            placeholder="Scholarship ID"
-            matLabel="Scholarship ID"
+            placeholder="{{ scholarshipIdLbl }}"
+            matLabel="scholarshipIdLbl"
           />
           <mat-icon
             *ngIf="sponsorForm.get('scholarshipId')?.value"
             matSuffix
             mat-icon-button
-            aria-label="Clear"
+            [attr.aria-label]="clearLbl"
             (click)="sponsorForm.get('scholarshipId')?.setValue('')"
             >close</mat-icon
           >
@@ -28,14 +28,14 @@
             matInput
             type="text"
             formControlName="scholarshipName"
-            placeholder="Scholarship Name"
-            matLabel="Scholarship Name"
+            placeholder="{{ scholarshipNameLbl }}"
+            matLabel="scholarshipNameLbl"
           />
           <button
             *ngIf="sponsorForm.get('scholarshipName')?.value"
             matSuffix
             mat-icon-button
-            aria-label="Clear"
+            [attr.aria-label]="clearLbl"
             (click)="sponsorForm.get('scholarshipName')?.setValue('')"
           >
             <mat-icon>close</mat-icon>
@@ -50,14 +50,14 @@
             matInput
             type="text"
             formControlName="totalAmount"
-            placeholder="Total Amount"
-            matLabel="Total Amount"
+            placeholder="{{ totalAmountLbl }}"
+            matLabel="totalAmountLbl"
           />
           <button
             *ngIf="sponsorForm.get('totalAmount')?.value"
             matSuffix
             mat-icon-button
-            aria-label="Clear"
+            [attr.aria-label]="clearLbl"
             (click)="sponsorForm.get('totalAmount')?.setValue('')"
           >
             <mat-icon>close</mat-icon>
@@ -72,14 +72,14 @@
             matInput
             type="text"
             formControlName="awardedAmount"
-            placeholder="Awarded Amount"
-            matLabel="Awarded Amount"
+            placeholder="{{ awardedAmountLbl }}"
+            matLabel="awardedAmountLbl"
           />
           <button
             *ngIf="sponsorForm.get('awardedAmount')?.value"
             matSuffix
             mat-icon-button
-            aria-label="Clear"
+            [attr.aria-label]="clearLbl"
             (click)="sponsorForm.get('awardedAmount')?.setValue('')"
           >
             <mat-icon>close</mat-icon>
@@ -92,9 +92,9 @@
         <mat-form-field appearance="fill">
           <mat-select
             formControlName="renewable"
-            placeholder="Renewable"
+            placeholder="{{ renewableLbl }}"
             id="renewable"
-            matLabel="Renewable"
+            matLabel="renewableLbl"
           >
             <mat-option
               *ngFor="let option of renewableOptions"
@@ -113,13 +113,13 @@
               formControlName="timeline"
               matStartDate
               id="startDate"
-              placeholder="Start date"
+              placeholder="{{ startDateLbl }}"
             />
             <input
               formControlName="timeline"
               matEndDate
               id="endDate"
-              placeholder="End date"
+              placeholder="{{ endDateLbl }}"
             />
           </mat-date-range-input>
           <mat-datepicker-toggle
@@ -135,10 +135,10 @@
         <mat-form-field appearance="fill">
           <mat-select
             formControlName="level"
-            placeholder="Level"
+            placeholder="{{ levelLbl }}"
             multiple
             id="level"
-            matLabel="Level"
+            matLabel="levelLbl"
           >
             <mat-option *ngFor="let level of levelOptions" [value]="level">{{
               level
@@ -153,8 +153,8 @@
           <mat-select
             formControlName="major"
             id="major"
-            placeholder="Major"
-            matLabel="Major"
+            placeholder="{{ majorLbl }}"
+            matLabel="majorLbl"
             multiple
           >
             <mat-option *ngFor="let option of majorOptions" [value]="option">{{
@@ -171,15 +171,15 @@
             matInput
             type="text"
             formControlName="gpa"
-            placeholder="GPA"
+            placeholder="{{ gpaLbl }}"
             id="gpa"
-            matLabel="GPA"
+            matLabel="gpaLbl"
           />
           <button
             *ngIf="sponsorForm.get('gpa')?.value"
             matSuffix
             mat-icon-button
-            aria-label="Clear"
+            [attr.aria-label]="clearLbl"
             (click)="sponsorForm.get('gpa')?.setValue('')"
           >
             <mat-icon>close</mat-icon>
@@ -193,8 +193,8 @@
           <mat-select
             formControlName="needOrMerit"
             id="needOrMerit"
-            placeholder="Need or Merit"
-            matLabel="Need or Merit"
+            placeholder="{{ needOrMeritLbl }}"
+            matLabel="needOrMeritLbl"
           >
             <mat-option
               *ngFor="let option of needMeritOptions"
@@ -212,15 +212,15 @@
             matInput
             type="text"
             formControlName="state"
-            placeholder="State"
+            placeholder="{{ stateLbl }}"
             id="state"
-            matLabel="State"
+            matLabel="stateLbl"
           />
           <button
             *ngIf="sponsorForm.get('state')?.value"
             matSuffix
             mat-icon-button
-            aria-label="Clear"
+            [attr.aria-label]="clearLbl"
             (click)="sponsorForm.get('state')?.setValue('')"
           >
             <mat-icon>close</mat-icon>
@@ -235,15 +235,15 @@
             matInput
             type="text"
             formControlName="county"
-            placeholder="County"
+            placeholder="{{ countyLbl }}"
             id="county"
-            matLabel="County"
+            matLabel="countyLbl"
           />
           <button
             *ngIf="sponsorForm.get('county')?.value"
             matSuffix
             mat-icon-button
-            aria-label="Clear"
+            [attr.aria-label]="clearLbl"
             (click)="sponsorForm.get('county')?.setValue('')"
           >
             <mat-icon>close</mat-icon>
@@ -255,7 +255,9 @@
 
   <div class="row">
     <div class="col-12 text-center">
-      <button type="submit" class="primary-btn submit-btn">Submit</button>
+      <button type="submit" class="primary-btn submit-btn">
+        {{ submitLbl }}
+      </button>
     </div>
   </div>
 </form>

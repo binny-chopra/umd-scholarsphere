@@ -8,6 +8,7 @@ import { AllApisService } from '../../services/all-apis.service';
 import { ApplicationConstants } from '../../../assets/constants/application-constants';
 import { CommonModule } from '@angular/common';
 import { IScholarDetails } from '../../interfaces/i-scholar-details';
+import { NewScholarComponent } from '../new-scholar/new-scholar.component';
 
 @Component({
   selector: 'app-scholars',
@@ -19,17 +20,35 @@ import { IScholarDetails } from '../../interfaces/i-scholar-details';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    NewScholarComponent,
   ],
   templateUrl: './scholars.component.html',
   styleUrl: './scholars.component.scss',
 })
 export class ScholarsComponent implements OnInit {
-  na: string = ApplicationConstants.NA_STRING;
-  displayedColumns: string[] = Object.values(
+  public addNewScholarFlag: boolean = false;
+  public filterLbl: string = ApplicationConstants.FILTER;
+  public filterExLbl: string = ApplicationConstants.FILTER_EX;
+  public closeLbl: string = ApplicationConstants.CLOSE;
+  public addNewScholarLbl: string = ApplicationConstants.ADD_NEW_SCHOLAR;
+  public UIDLbl: string = ApplicationConstants.UID;
+  public studentNameLbl: string = ApplicationConstants.STUDENT_NAME;
+  public scholarshipIdLbl: string = ApplicationConstants.SCHOLARSHIP_ID;
+  public scholarshipNameLbl: string = ApplicationConstants.SCHOLARSHIP_NAME;
+  public rewardAmountLbl: string = ApplicationConstants.REWARD_AMOUNT;
+  public renewableLbl: string = ApplicationConstants.RENEWABLE;
+  public timelineLbl: string = ApplicationConstants.TIMELINE;
+  public majorLbl: string = ApplicationConstants.MAJOR;
+  public gpaLbl: string = ApplicationConstants.GPA;
+  public needOrMeritLbl: string = ApplicationConstants.NEED_OR_MERIT;
+  public stateLbl: string = ApplicationConstants.STATE;
+  public countyLbl: string = ApplicationConstants.COUNTY;
+  public noDataFilterLbl: string = ApplicationConstants.FILTER_NO_DATA;
+  public displayedColumns: string[] = Object.values(
     ApplicationConstants.SCHOLAR_DETAILS
   );
-  displayedColumnIds = ApplicationConstants.SCHOLAR_DETAILS;
-  dataSource!: MatTableDataSource<IScholarDetails>;
+  public displayedColumnIds = ApplicationConstants.SCHOLAR_DETAILS;
+  public dataSource!: MatTableDataSource<IScholarDetails>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -51,7 +70,10 @@ export class ScholarsComponent implements OnInit {
       .trim()
       .toLowerCase();
 
-    this.dataSource.filterPredicate = (data: any, filter: string) => {
+    this.dataSource.filterPredicate = (
+      data: IScholarDetails,
+      filter: string
+    ) => {
       const searchText = filter.toLowerCase();
       const columnsToFilter = [
         this.displayedColumnIds.STUDENT_ID,
@@ -68,7 +90,10 @@ export class ScholarsComponent implements OnInit {
       return columnsToFilter.some((column) => {
         const columnValue = column
           .split('.')
-          .reduce((obj, key) => obj[key], data);
+          .reduce((obj, key) => (obj as any)?.[key], data) as any;
+        if (columnValue === undefined || columnValue === null) {
+          return false;
+        }
 
         if (typeof columnValue === ApplicationConstants.NUMBER) {
           return columnValue.toString().includes(searchText);

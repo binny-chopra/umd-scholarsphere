@@ -5,6 +5,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormControl } from '@angular/forms';
+import { ApplicationConstants } from '../../../assets/constants/application-constants';
 
 @Component({
   selector: 'app-scholarships',
@@ -20,8 +21,10 @@ import { FormControl } from '@angular/forms';
   styleUrl: './scholarships.component.scss',
 })
 export class ScholarshipsComponent {
-  activeTabIndex: number = 0;
-  tabControl = new FormControl(0);
+  public activeTabIndex: number = 0;
+  public sponsorsLbl: string = ApplicationConstants.SPONSORS;
+  public studentsLbl: string = ApplicationConstants.STUDENTS;
+  private tabControl = new FormControl(0);
 
   constructor() {
     this.tabControl.valueChanges.subscribe((index) => {

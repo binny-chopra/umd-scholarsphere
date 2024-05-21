@@ -37,6 +37,21 @@ import { ApplicationConstants } from '../../../assets/constants/application-cons
   styleUrl: './new-sponsor.component.scss',
 })
 export class NewSponsorComponent implements OnInit {
+  public submitLbl: string = ApplicationConstants.SUBMIT;
+  public clearLbl: string = ApplicationConstants.CLEAR;
+  public scholarshipIdLbl: string = ApplicationConstants.SCHOLARSHIP_ID;
+  public scholarshipNameLbl: string = ApplicationConstants.SCHOLARSHIP_NAME;
+  public totalAmountLbl: string = ApplicationConstants.TOTAL_AMOUNT;
+  public awardedAmountLbl: string = ApplicationConstants.AWARDED_AMOUNT;
+  public renewableLbl: string = ApplicationConstants.RENEWABLE;
+  public startDateLbl: string = ApplicationConstants.START_DATE;
+  public endDateLbl: string = ApplicationConstants.END_DATE;
+  public levelLbl: string = ApplicationConstants.LEVEL;
+  public majorLbl: string = ApplicationConstants.MAJOR;
+  public gpaLbl: string = ApplicationConstants.GPA;
+  public needOrMeritLbl: string = ApplicationConstants.NEED_OR_MERIT;
+  public stateLbl: string = ApplicationConstants.STATE;
+  public countyLbl: string = ApplicationConstants.COUNTY;
   renewableOptions: string[] = ApplicationConstants.YES_NO;
   levelOptions: string[] = ApplicationConstants.COURSE_LEVEL;
   majorOptions: string[] = ApplicationConstants.MAJORS;

@@ -20,19 +20,35 @@ import { NewSponsorComponent } from '../new-sponsor/new-sponsor.component';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    NewSponsorComponent
+    NewSponsorComponent,
   ],
   templateUrl: './sponsors.component.html',
   styleUrl: './sponsors.component.scss',
 })
 export class SponsorsComponent implements OnInit {
-  addNewSponsorFlag: boolean = false;
-  na: string = ApplicationConstants.NA_STRING;
-  displayedColumns: string[] = Object.values(
+  public addNewSponsorFlag: boolean = false;
+  public filterLbl: string = ApplicationConstants.FILTER;
+  public filterExLbl: string = ApplicationConstants.FILTER_EX;
+  public closeLbl: string = ApplicationConstants.CLOSE;
+  public addNewSponsorLbl: string = ApplicationConstants.ADD_NEW_SPONSOR;
+  public scholarshipIdLbl: string = ApplicationConstants.SCHOLARSHIP_ID;
+  public scholarshipNameLbl: string = ApplicationConstants.SCHOLARSHIP_NAME;
+  public totalAmountLbl: string = ApplicationConstants.TOTAL_AMOUNT;
+  public rewardAmountLbl: string = ApplicationConstants.REWARD_AMOUNT;
+  public renewableLbl: string = ApplicationConstants.RENEWABLE;
+  public timelineLbl: string = ApplicationConstants.TIMELINE;
+  public levelLbl: string = ApplicationConstants.LEVEL;
+  public majorLbl: string = ApplicationConstants.MAJOR;
+  public gpaLbl: string = ApplicationConstants.GPA;
+  public needOrMeritLbl: string = ApplicationConstants.NEED_OR_MERIT;
+  public stateLbl: string = ApplicationConstants.STATE;
+  public countyLbl: string = ApplicationConstants.COUNTY;
+  public noDataFilterLbl: string = ApplicationConstants.FILTER_NO_DATA;
+  public displayedColumns: string[] = Object.values(
     ApplicationConstants.SPONSOR_DETAILS
   );
-  displayedColumnIds = ApplicationConstants.SPONSOR_DETAILS;
-  dataSource!: MatTableDataSource<ISponsorshipDetails>;
+  public displayedColumnIds = ApplicationConstants.SPONSOR_DETAILS;
+  public dataSource!: MatTableDataSource<ISponsorshipDetails>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
