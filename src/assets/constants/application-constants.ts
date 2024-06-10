@@ -5,7 +5,8 @@ export class ApplicationConstants {
   public static SCHOLARSHIP_SPHERE: string = 'Scholarship Sphere';
   public static SUBMIT: string = 'Submit';
   public static SPONSORS: string = 'Sponsors';
-  public static STUDENTS: string = 'Students';
+  public static SCHOLARS: string = 'Scholars';
+  public static STUDENT_APPLICANTS: string = 'Student Applicants';
   public static CLEAR: string = 'Clear';
   public static CLOSE: string = 'Close';
   public static ADD_NEW_SCHOLAR: string = 'Add New Scholar';
@@ -32,6 +33,9 @@ export class ApplicationConstants {
   public static RESIDENCY: string = 'Residency';
   public static STATE: string = 'State';
   public static COUNTY: string = 'County';
+  public static MAJORITY_CLASSES: string = 'Majority Classes';
+  public static EMAIL: string = 'Email';
+  public static GRAD_DATE: string = 'Graduation Date';
 
   public static SPONSOR_DETAILS = {
     SCHOLARSHIP_ID: 'scholarshipId',
@@ -67,6 +71,18 @@ export class ApplicationConstants {
     TIMELINE: 'timeline',
     STUDENT_MAJOR: 'studentMajor',
     NEED_OR_MERIT: 'needOrMerit',
+    STATE: 'state',
+    COUNTY: 'county',
+    GPA: 'gpa',
+  };
+
+  public static STUDENT_APPLICANT_DETAILS = {
+    STUDENT_ID: 'studentId',
+    STUDENT_NAME: 'studentName',
+    STUDENT_EMAIL: 'studentEmail',
+    STUDENT_MAJOR: 'studentMajor',
+    GRAD_DATE: 'gradDate',
+    MAJORITY_CLASSES: 'majorityClasses',
     STATE: 'state',
     COUNTY: 'county',
     GPA: 'gpa',

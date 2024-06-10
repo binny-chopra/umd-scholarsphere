@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormControl } from '@angular/forms';
 import { ApplicationConstants } from '../../../assets/constants/application-constants';
+import { StudentApplicantsComponent } from '../student-applicants/student-applicants.component';
 
 @Component({
   selector: 'app-scholarships',
@@ -16,6 +17,7 @@ import { ApplicationConstants } from '../../../assets/constants/application-cons
     MatIconModule,
     SponsorsComponent,
     ScholarsComponent,
+    StudentApplicantsComponent,
   ],
   templateUrl: './scholarships.component.html',
   styleUrl: './scholarships.component.scss',
@@ -23,7 +25,8 @@ import { ApplicationConstants } from '../../../assets/constants/application-cons
 export class ScholarshipsComponent {
   public activeTabIndex: number = 0;
   public sponsorsLbl: string = ApplicationConstants.SPONSORS;
-  public studentsLbl: string = ApplicationConstants.STUDENTS;
+  public scholarsLbl: string = ApplicationConstants.SCHOLARS;
+  public applicantsLbl: string = ApplicationConstants.STUDENT_APPLICANTS;
   private tabControl = new FormControl(0);
 
   constructor() {

@@ -9,7 +9,13 @@
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon>school </mat-icon>
-        <span class="margin-hr-8 font-size-16">{{ studentsLbl }}</span>
+        <span class="margin-hr-8 font-size-16">{{ scholarsLbl }}</span>
+      </ng-template>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>how_to_reg </mat-icon>
+        <span class="margin-hr-8 font-size-16">{{ applicantsLbl }}</span>
       </ng-template>
     </mat-tab>
   </mat-tab-group>
@@ -22,6 +28,9 @@
       </div>
       <div *ngIf="activeTabIndex === 1">
         <app-scholars></app-scholars>
+      </div>
+      <div *ngIf="activeTabIndex === 2">
+        <student-applicants></student-applicants>
       </div>
     </div>
   </div>
