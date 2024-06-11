@@ -9,12 +9,10 @@ export interface ISponsorshipDetails {
 }
 
 export interface ISponsorCriteria {
-  criteria: {
-    level: string[];
-    major: string[];
-    gpa: string;
-    needOrMerit: string;
-    state: string;
-    county?: string[];
-  };
+  level: string[];
+  major: string[];
+  gpa: string;
+  needOrMerit: string;
+  state: string;
+  county?: string[];
 }

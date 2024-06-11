@@ -26,7 +26,7 @@
       "major": ["Accounting"],
       "gpa": "NA",
       "needOrMerit": "Need",
-      "state": "Maryland"
+      "state": "New Jersey"
     }
   },
   {
@@ -41,7 +41,7 @@
       "major": ["All"],
       "gpa": "5.0",
       "needOrMerit": "Merit",
-      "state": "Open"
+      "state": "International"
     }
   },
   {
@@ -71,7 +71,7 @@
       "major": ["Accounting"],
       "gpa": "3.0",
       "needOrMerit": "Need",
-      "state": "Maryland"
+      "state": "Connecticut"
     }
   },
   {
@@ -86,7 +86,7 @@
       "major": ["Accounting"],
       "gpa": "3.0",
       "needOrMerit": "Need",
-      "state": "Open"
+      "state": "North Carolina"
     }
   },
   {
@@ -117,7 +117,7 @@
       "major": ["Finance"],
       "gpa": "5.0",
       "needOrMerit": "Merit",
-      "state": "Open"
+      "state": "New York"
     }
   },
   {
@@ -132,7 +132,7 @@
       "major": ["BMGT Honors"],
       "gpa": "3.0",
       "needOrMerit": "Need",
-      "state": "Maryland"
+      "state": "Virginia"
     }
   },
   {
@@ -163,7 +163,7 @@
       "major": ["Open Incoming"],
       "gpa": "5.0",
       "needOrMerit": "Merit",
-      "state": "NA"
+      "state": "Florida"
     }
   }
 ]

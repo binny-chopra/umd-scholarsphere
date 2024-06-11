@@ -5,10 +5,10 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ISponsorshipDetails } from '../../interfaces/i-sponsorship-details';
-import { AllApisService } from '../../services/all-apis.service';
 import { ApplicationConstants } from '../../../assets/constants/application-constants';
 import { CommonModule } from '@angular/common';
 import { NewSponsorComponent } from '../new-sponsor/new-sponsor.component';
+import { CommonResService } from '../../services/common-res.service';
 
 @Component({
   selector: 'app-sponsors',
@@ -53,19 +53,20 @@ export class SponsorsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private allApiService: AllApisService) {}
+  constructor(
+    private commonRes: CommonResService
+  ) {}
 
-  ngOnInit(): void {
-    this.allApiService
-      .sponsorDetailsApi()
-      .subscribe((response: ISponsorshipDetails[]) => {
-        this.dataSource = new MatTableDataSource(response);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });
+  public ngOnInit(): void {
+    this.commonRes.getSponsorDetails().subscribe((response) => {
+      this.dataSource = new MatTableDataSource(response);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+    this.commonRes.sponsorDetailsApi();
   }
 
-  applyFilter(event: Event) {
+  public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value
       .trim()
       .toLowerCase();
@@ -114,7 +115,7 @@ export class SponsorsComponent implements OnInit {
     }
   }
 
-  currencyFormat(amountValue: number): string {
+  public currencyFormat(amountValue: number): string {
     if (!amountValue || isNaN(amountValue)) {
       return amountValue.toString();
     }
@@ -124,5 +125,10 @@ export class SponsorsComponent implements OnInit {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amountValue);
+  }
+
+  public openScholarship(scholarshipId: string): void {
+    const url = `http://localhost:4200/scholarship/${scholarshipId}`;
+    window.open(url, '_blank');
   }
 }
