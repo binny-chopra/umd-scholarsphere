@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -8,8 +8,10 @@ import { AllApisService } from '../../services/all-apis.service';
 import { ApplicationConstants } from '../../../assets/constants/application-constants';
 import { CommonModule } from '@angular/common';
 import { IStudentApplicants } from '../../interfaces/i-student-applicants';
-import { CommonResService } from '../../services/common-res.service';
 import { ISponsorshipDetails } from '../../interfaces/i-sponsorship-details';
+import { SingleSponsorComponent } from '../single-sponsor/single-sponsor.component';
+import { UtilService } from '../../services/util.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'student-applicants',
@@ -21,12 +23,13 @@ import { ISponsorshipDetails } from '../../interfaces/i-sponsorship-details';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
+    SingleSponsorComponent,
   ],
   templateUrl: './student-applicants.component.html',
   styleUrl: './student-applicants.component.scss',
 })
-export class StudentApplicantsComponent implements OnInit {
-  private sponsorDetailsRes!: ISponsorshipDetails[];
+export class StudentApplicantsComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   public showSponsorDetails: boolean = false;
   public filterLbl: string = ApplicationConstants.FILTER;
   public filterExLbl: string = ApplicationConstants.FILTER_EX;
@@ -52,34 +55,39 @@ export class StudentApplicantsComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private allApiService: AllApisService,
-    private commonRes: CommonResService
+    private utilService: UtilService,
+    private apiService: AllApisService
   ) {}
 
   public ngOnInit(): void {
-    const url = window.location.href;
-    this.dataSourceForUI([]);
-    if (url.includes('scholarship/') && url.split('/').pop()) {
-      this.commonRes.sponsorDetailsApi();
-      this.commonRes
-        .getSponsorDetails()
-        .subscribe((sponsorResponse: ISponsorshipDetails[]) => {
-          this.sponsorDetailsRes = sponsorResponse;
-          if (this.sponsorDetailsRes?.length > 0) {
-            this.showSponsorDetails = true;
-            const scholarshipId: string = url.split('/').pop() ?? '';
-            this.studentApplicantsResFn(scholarshipId);
-            this.selectedSponsor = this.sponsorDetailsRes.find(
-              (sponsor: ISponsorshipDetails) =>
-                sponsor.scholarshipId === scholarshipId
+    this.dataSourceForUiFn([]);
+    this.apiService
+      .studentApplicantsApi()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response: IStudentApplicants[]) => {
+          if (
+            this.utilService.url.includes('scholarship/') &&
+            this.utilService.url.split('/').pop()
+          ) {
+            this.utilService.filteredStudentsForSponsor.subscribe(
+              (filteredResponse: IStudentApplicants[]) => {
+                this.dataSourceForUiFn(filteredResponse);
+                this.showSponsorDetails = true;
+              }
             );
-            console.log(this.selectedSponsor);
+          } else {
+            this.dataSourceForUiFn(response);
+            this.showSponsorDetails = false;
           }
-        });
-    } else {
-      this.showSponsorDetails = false;
-      this.studentApplicantsResFn();
-    }
+        },
+        error: (error) => {
+          console.error(
+            'Error fetching studentApplicantsApi in StudentApplicantsComponent:',
+            error
+          );
+        },
+      });
   }
 
   public applyFilter(event: Event) {
@@ -139,48 +147,12 @@ export class StudentApplicantsComponent implements OnInit {
     }
   }
 
-  private studentApplicantsResFn(scholarshipId?: string): void {
-    this.allApiService.studentApplicantsApi().subscribe({
-      next: (response: IStudentApplicants[]) => {
-        if (scholarshipId) this.filteredStudentsFn(response, scholarshipId);
-        else this.dataSourceForUI(response);
-      },
-      error: (error) => {
-        console.error('Error fetching student applicants:', error);
-      },
-    });
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
-  private filteredStudentsFn(
-    studentApplicants: IStudentApplicants[],
-    scholarshipId: string
-  ) {
-    let currentScholarship: ISponsorshipDetails | undefined =
-      this.sponsorDetailsRes.find(
-        (sponsor: ISponsorshipDetails) =>
-          sponsor.scholarshipId === scholarshipId
-      );
-
-    if (!currentScholarship || !currentScholarship.criteria) {
-      return;
-    }
-
-    const { level, major, gpa, state, county } = currentScholarship?.criteria;
-    const filteredStudentApplicants: IStudentApplicants[] =
-      studentApplicants.filter((student) => {
-        const matchesLevel = level.includes(student.majorityClasses);
-        const matchesMajor = major.includes(student.studentMajor);
-        const matchesGPA = parseFloat(student.gpa) >= parseFloat(gpa);
-        const matchesState = student.state === state;
-        const matchesCounty = county ? county.includes(student.county) : true;
-        return matchesState;
-      });
-    if (filteredStudentApplicants?.length > 0) {
-      this.dataSourceForUI(filteredStudentApplicants);
-    }
-  }
-
-  private dataSourceForUI(ds: IStudentApplicants[]): void {
+  private dataSourceForUiFn(ds: IStudentApplicants[]): void {
     this.dataSource = new MatTableDataSource(ds);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

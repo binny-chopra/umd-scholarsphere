@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -8,7 +8,8 @@ import { ISponsorshipDetails } from '../../interfaces/i-sponsorship-details';
 import { ApplicationConstants } from '../../../assets/constants/application-constants';
 import { CommonModule } from '@angular/common';
 import { NewSponsorComponent } from '../new-sponsor/new-sponsor.component';
-import { CommonResService } from '../../services/common-res.service';
+import { AllApisService } from '../../services/all-apis.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-sponsors',
@@ -25,7 +26,8 @@ import { CommonResService } from '../../services/common-res.service';
   templateUrl: './sponsors.component.html',
   styleUrl: './sponsors.component.scss',
 })
-export class SponsorsComponent implements OnInit {
+export class SponsorsComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
   public addNewSponsorFlag: boolean = false;
   public filterLbl: string = ApplicationConstants.FILTER;
   public filterExLbl: string = ApplicationConstants.FILTER_EX;
@@ -53,17 +55,25 @@ export class SponsorsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(
-    private commonRes: CommonResService
-  ) {}
+  constructor(private apiService: AllApisService) {}
 
   public ngOnInit(): void {
-    this.commonRes.getSponsorDetails().subscribe((response) => {
-      this.dataSource = new MatTableDataSource(response);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
-    this.commonRes.sponsorDetailsApi();
+    this.apiService
+      .sponsorDetailsApi()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response: ISponsorshipDetails[]) => {
+          this.dataSource = new MatTableDataSource(response);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        error: (error) => {
+          console.error(
+            'Error fetching sponsorDetailsApi in SponsorsComponent:',
+            error
+          );
+        },
+      });
   }
 
   public applyFilter(event: Event) {
@@ -130,5 +140,10 @@ export class SponsorsComponent implements OnInit {
   public openScholarship(scholarshipId: string): void {
     const url = `http://localhost:4200/scholarship/${scholarshipId}`;
     window.open(url, '_blank');
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
