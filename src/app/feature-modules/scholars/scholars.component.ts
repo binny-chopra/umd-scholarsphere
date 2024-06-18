@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -9,6 +9,7 @@ import { ApplicationConstants } from '../../../assets/constants/application-cons
 import { CommonModule } from '@angular/common';
 import { IScholarDetails } from '../../interfaces/i-scholar-details';
 import { NewScholarComponent } from '../new-scholar/new-scholar.component';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-scholars',
@@ -25,7 +26,8 @@ import { NewScholarComponent } from '../new-scholar/new-scholar.component';
   templateUrl: './scholars.component.html',
   styleUrl: './scholars.component.scss',
 })
-export class ScholarsComponent implements OnInit {
+export class ScholarsComponent implements OnInit, AfterViewInit {
+  private destroy$ = new Subject<void>();
   public addNewScholarFlag: boolean = false;
   public filterLbl: string = ApplicationConstants.FILTER;
   public filterExLbl: string = ApplicationConstants.FILTER_EX;
@@ -65,7 +67,14 @@ export class ScholarsComponent implements OnInit {
       });
   }
 
-  applyFilter(event: Event) {
+  public ngAfterViewInit(): void {
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+
+  public applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value
       .trim()
       .toLowerCase();
@@ -121,7 +130,7 @@ export class ScholarsComponent implements OnInit {
     }
   }
 
-  currencyFormat(amountValue: number): string {
+  public currencyFormat(amountValue: number): string {
     if (!amountValue || isNaN(amountValue)) {
       return amountValue.toString();
     }
@@ -131,5 +140,10 @@ export class ScholarsComponent implements OnInit {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(amountValue);
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -26,7 +32,7 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './sponsors.component.html',
   styleUrl: './sponsors.component.scss',
 })
-export class SponsorsComponent implements OnInit, OnDestroy {
+export class SponsorsComponent implements OnInit, AfterViewInit, OnDestroy {
   private destroy$ = new Subject<void>();
   public addNewSponsorFlag: boolean = false;
   public filterLbl: string = ApplicationConstants.FILTER;
@@ -74,6 +80,13 @@ export class SponsorsComponent implements OnInit, OnDestroy {
           );
         },
       });
+  }
+
+  public ngAfterViewInit(): void {
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
   }
 
   public applyFilter(event: Event) {

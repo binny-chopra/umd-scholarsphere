@@ -78,12 +78,16 @@
     </ng-container>
 
     <ng-container matColumnDef="{{ displayedColumnIds.LEVEL }}">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ levelLbl }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ levelLbl }}
+      </th>
       <td mat-cell *matCellDef="let row">{{ row.criteria.level }}</td>
     </ng-container>
 
     <ng-container matColumnDef="{{ displayedColumnIds.MAJOR }}">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ majorLbl }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ majorLbl }}
+      </th>
       <td mat-cell *matCellDef="let row">{{ row.criteria.major }}</td>
     </ng-container>
 
@@ -100,12 +104,16 @@
     </ng-container>
 
     <ng-container matColumnDef="{{ displayedColumnIds.STATE }}">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ stateLbl }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ stateLbl }}
+      </th>
       <td mat-cell *matCellDef="let row">{{ row.criteria.state }}</td>
     </ng-container>
 
     <ng-container matColumnDef="{{ displayedColumnIds.COUNTY }}">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ countyLbl }}</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        {{ countyLbl }}
+      </th>
       <td mat-cell *matCellDef="let row">
         {{ row.criteria?.county?.join(", ") }}
       </td>
