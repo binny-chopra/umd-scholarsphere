@@ -18,6 +18,7 @@ import { ISponsorshipDetails } from '../../interfaces/i-sponsorship-details';
 import { SingleSponsorComponent } from '../single-sponsor/single-sponsor.component';
 import { UtilService } from '../../services/util.service';
 import { Subject, takeUntil } from 'rxjs';
+import { IColDef } from '../../interfaces/i-common';
 
 @Component({
   selector: 'student-applicants',
@@ -42,15 +43,6 @@ export class StudentApplicantsComponent
   public filterLbl: string = ApplicationConstants.FILTER;
   public filterExLbl: string = ApplicationConstants.FILTER_EX;
   public closeLbl: string = ApplicationConstants.CLOSE;
-  public UIDLbl: string = ApplicationConstants.UID;
-  public studentNameLbl: string = ApplicationConstants.STUDENT_NAME;
-  public studentEmailLbl: string = ApplicationConstants.EMAIL;
-  public gradDateLbl: string = ApplicationConstants.GRAD_DATE;
-  public majorLbl: string = ApplicationConstants.MAJOR;
-  public gpaLbl: string = ApplicationConstants.GPA;
-  public stateLbl: string = ApplicationConstants.STATE;
-  public countyLbl: string = ApplicationConstants.COUNTY;
-  public majorityClassesLbl: string = ApplicationConstants.MAJORITY_CLASSES;
   public noDataFilterLbl: string = ApplicationConstants.FILTER_NO_DATA;
   public displayedColumns: string[] = Object.values(
     ApplicationConstants.STUDENT_APPLICANT_DETAILS
@@ -58,6 +50,44 @@ export class StudentApplicantsComponent
   public displayedColumnIds = ApplicationConstants.STUDENT_APPLICANT_DETAILS;
   public dataSource!: MatTableDataSource<IStudentApplicants>;
   public selectedSponsor!: ISponsorshipDetails | undefined;
+  public colDef: IColDef[] = [
+    {
+      id: ApplicationConstants.STUDENT_APPLICANT_DETAILS.STUDENT_ID,
+      label: ApplicationConstants.UID,
+    },
+    {
+      id: ApplicationConstants.STUDENT_APPLICANT_DETAILS.STUDENT_NAME,
+      label: ApplicationConstants.STUDENT_NAME,
+    },
+    {
+      id: ApplicationConstants.STUDENT_APPLICANT_DETAILS.STUDENT_EMAIL,
+      label: ApplicationConstants.EMAIL,
+    },
+    {
+      id: ApplicationConstants.STUDENT_APPLICANT_DETAILS.STUDENT_MAJOR,
+      label: ApplicationConstants.MAJOR,
+    },
+    {
+      id: ApplicationConstants.STUDENT_APPLICANT_DETAILS.GPA,
+      label: ApplicationConstants.GPA,
+    },
+    {
+      id: ApplicationConstants.STUDENT_APPLICANT_DETAILS.GRAD_DATE,
+      label: ApplicationConstants.GRAD_DATE,
+    },
+    {
+      id: ApplicationConstants.STUDENT_APPLICANT_DETAILS.MAJORITY_CLASSES,
+      label: ApplicationConstants.MAJORITY_CLASSES,
+    },
+    {
+      id: ApplicationConstants.STUDENT_APPLICANT_DETAILS.STATE,
+      label: ApplicationConstants.STATE,
+    },
+    {
+      id: ApplicationConstants.STUDENT_APPLICANT_DETAILS.COUNTY,
+      label: ApplicationConstants.COUNTY,
+    },
+  ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -115,17 +145,7 @@ export class StudentApplicantsComponent
       filter: string
     ) => {
       const searchText = filter.toLowerCase();
-      const columnsToFilter = [
-        this.displayedColumnIds.STUDENT_ID,
-        this.displayedColumnIds.STUDENT_NAME,
-        this.displayedColumnIds.STUDENT_EMAIL,
-        this.displayedColumnIds.STUDENT_MAJOR,
-        this.displayedColumnIds.GRAD_DATE,
-        this.displayedColumnIds.GPA,
-        this.displayedColumnIds.STATE,
-        this.displayedColumnIds.COUNTY,
-        this.displayedColumnIds.MAJORITY_CLASSES,
-      ];
+      const columnsToFilter = this.colDef.map((col) => col.id);
 
       // Check if any of the columns contain the search text
       return columnsToFilter.some((column) => {
