@@ -19,6 +19,13 @@ import { SingleSponsorComponent } from '../single-sponsor/single-sponsor.compone
 import { UtilService } from '../../services/util.service';
 import { Subject, takeUntil } from 'rxjs';
 import { IColDef } from '../../interfaces/i-common';
+import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from '@angular/animations';
 
 @Component({
   selector: 'student-applicants',
@@ -33,6 +40,16 @@ import { IColDef } from '../../interfaces/i-common';
     SingleSponsorComponent,
   ],
   templateUrl: './student-applicants.component.html',
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition(
+        'expanded <=> collapsed',
+        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
+      ),
+    ]),
+  ],
   styleUrl: './student-applicants.component.scss',
 })
 export class StudentApplicantsComponent
@@ -88,6 +105,7 @@ export class StudentApplicantsComponent
       label: ApplicationConstants.COUNTY,
     },
   ];
+  public expandedElement!: IStudentApplicants | null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
