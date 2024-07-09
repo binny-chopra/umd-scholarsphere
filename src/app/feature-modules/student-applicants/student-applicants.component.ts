@@ -6,13 +6,13 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSort, MatSortModule, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AllApisService } from '../../services/all-apis.service';
 import { ApplicationConstants } from '../../../assets/constants/application-constants';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { IStudentApplicants } from '../../interfaces/i-student-applicants';
 import { ISponsorshipDetails } from '../../interfaces/i-sponsorship-details';
 import { SingleSponsorComponent } from '../single-sponsor/single-sponsor.component';
@@ -51,6 +51,7 @@ import {
     ]),
   ],
   styleUrl: './student-applicants.component.scss',
+  providers: [DatePipe],
 })
 export class StudentApplicantsComponent
   implements OnInit, AfterViewInit, OnDestroy
@@ -104,7 +105,13 @@ export class StudentApplicantsComponent
       id: ApplicationConstants.STUDENT_APPLICANT_DETAILS.COUNTY,
       label: ApplicationConstants.COUNTY,
     },
+    {
+      id: ApplicationConstants.STUDENT_APPLICANT_DETAILS.TIMESTAMP,
+      label: ApplicationConstants.APP_DATE,
+    },
   ];
+  public quesForCandidate: { [key: string]: string }[] =
+    ApplicationConstants.QUES_FOR_CANDIDATE;
   public expandedElement!: IStudentApplicants | null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -112,7 +119,8 @@ export class StudentApplicantsComponent
 
   constructor(
     private utilService: UtilService,
-    private apiService: AllApisService
+    private apiService: AllApisService,
+    private datePipe: DatePipe
   ) {}
 
   public ngOnInit(): void {
@@ -151,6 +159,10 @@ export class StudentApplicantsComponent
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }
+  }
+
+  trackById(item: any): string {
+    return item.id;
   }
 
   public applyFilter(event: Event) {
@@ -209,5 +221,26 @@ export class StudentApplicantsComponent
     this.dataSource = new MatTableDataSource(ds);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    this.dataSource.sortingDataAccessor = (item: IStudentApplicants, property) => {
+      switch (property) {
+        case 'timestamp':
+          return new Date(item.timestamp);
+        default:
+          return (item as any)[property];
+      }
+    };
+
+    // Sort by timestamp ascending by default
+    if (this.dataSource.sort) {
+      this.dataSource.sort.direction = 'asc';
+      this.dataSource.sort.active = 'timestamp';
+    }
+  }
+
+
+  formatTimestamp(timestamp: string): string {
+    const dateObj = new Date(timestamp.replace(' AST', ' GMT-4'));
+    return this.datePipe.transform(dateObj, 'MMM - dd - yyyy, HH:mm:ss') ?? '';
   }
 }

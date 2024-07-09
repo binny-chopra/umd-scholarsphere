@@ -8,4 +8,5 @@ export interface IStudentApplicants {
   gpa: string;
   state: string;
   county: string;
+  timestamp: string;
 }

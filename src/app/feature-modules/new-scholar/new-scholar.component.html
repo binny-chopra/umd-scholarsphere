@@ -130,23 +130,32 @@
         <mat-form-field class="w-100">
           <mat-date-range-input [rangePicker]="picker">
             <input
-              formControlName="timeline"
               matStartDate
+              formControlName="startDate"
+              placeholder="Start date"
               id="startDate"
-              placeholder="{{ startDateLbl }}"
             />
             <input
-              formControlName="timeline"
               matEndDate
+              formControlName="endDate"
+              placeholder="End date"
               id="endDate"
-              placeholder="{{ endDateLbl }}"
             />
           </mat-date-range-input>
+          <mat-hint>Scholarship Timeline (MM/DD/YYYY)</mat-hint>
           <mat-datepicker-toggle
             matIconSuffix
             [for]="picker"
           ></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
+
+          @if
+          (scholarForm.controls['startDate'].hasError('matStartDateInvalid')) {
+          <mat-error>Invalid start date</mat-error>
+          } @if (scholarForm.controls['endDate'].hasError('matEndDateInvalid'))
+          {
+          <mat-error>Invalid end date</mat-error>
+          }
         </mat-form-field>
       </div>
     </div>

@@ -73,13 +73,14 @@ export class NewScholarComponent implements OnInit {
       scholarshipName: ['', Validators.required],
       awardedAmount: ['', Validators.required],
       renewable: ['', Validators.required],
-      timeline: ['', Validators.required],
       level: ['', Validators.required],
       major: ['', Validators.required],
       gpa: ['', Validators.required],
       needOrMerit: ['', Validators.required],
       state: ['', Validators.required],
       county: [''],
+      startDate: ['', Validators.required],
+      endDate: ['', Validators.required],
     });
   }
 

@@ -36,6 +36,7 @@ export class ApplicationConstants {
   public static MAJORITY_CLASSES: string = 'Majority Classes';
   public static EMAIL: string = 'Email';
   public static GRAD_DATE: string = 'Graduation Date';
+  public static APP_DATE: string = 'Application Date';
 
   public static SPONSOR_DETAILS = {
     SCHOLARSHIP_ID: 'scholarshipId',
@@ -86,7 +87,29 @@ export class ApplicationConstants {
     STATE: 'state',
     COUNTY: 'county',
     GPA: 'gpa',
+    TIMESTAMP: 'timestamp'
   };
+
+  public static QUES_FOR_CANDIDATE: { [key: string]: string }[] = [
+    {
+      question:
+        'Thinking about your personal strengths, in 4-5 sentences, describe what sets you apart as a Smith student.',
+      field: 'personalStatement',
+    },
+    {
+      question: 'Describe why you chose to study business.',
+      field: 'whyBusiness',
+    },
+    { question: 'What are your career plans?', field: 'careerPlans' },
+    {
+      question: 'Please list your honors and/or awards.',
+      field: 'honorsOrAwards',
+    },
+    {
+      question: 'Please list your non-Smith extra-curricular activities.',
+      field: 'extracurricular',
+    },
+  ];
 
   public static SCHOLAR_CRITERIA = {
     STUDENT_MAJOR: `criteria.${ApplicationConstants.SCHOLAR_DETAILS.STUDENT_MAJOR}`,
