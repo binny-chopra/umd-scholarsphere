@@ -4,7 +4,7 @@ export interface ISponsorshipDetails {
   totalAmount: number | string;
   awardedAmount: number | string;
   renewable: string;
-  timeline: string[];
+  timeline: string;
   criteria: ISponsorCriteria;
 }
 

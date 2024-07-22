@@ -61,11 +61,11 @@ export class SponsorsComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private apiService: AllApisService) {}
+  constructor(private apiService: AllApisService) { }
 
   public ngOnInit(): void {
     this.apiService
-      .sponsorDetailsApi()
+      .sponsorsDetailsApi()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response: ISponsorshipDetails[]) => {
@@ -75,7 +75,7 @@ export class SponsorsComponent implements OnInit, AfterViewInit, OnDestroy {
         },
         error: (error) => {
           console.error(
-            'Error fetching sponsorDetailsApi in SponsorsComponent:',
+            'Error fetching sponsorsDetailsApi in SponsorsComponent:',
             error
           );
         },
@@ -151,7 +151,7 @@ export class SponsorsComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   public openScholarship(scholarshipId: string): void {
-    const url = `http://localhost:4200/scholarship/${scholarshipId}`;
+    const url = `${ApplicationConstants.HOST_URL}/${scholarshipId}`;
     window.open(url, '_blank');
   }
 

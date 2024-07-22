@@ -1,22 +1,10 @@
 <div class="row">
-  <mat-form-field
-    class="filter-field col-6"
-    [ngClass]="{ 'd-none': addNewSponsorFlag }"
-  >
+  <mat-form-field class="filter-field col-6" [ngClass]="{ 'd-none': addNewSponsorFlag }">
     <mat-label>{{ filterLbl }}</mat-label>
-    <input
-      matInput
-      (keyup)="applyFilter($event)"
-      placeholder="{{ filterExLbl }}"
-      #input
-    />
+    <input matInput (keyup)="applyFilter($event)" placeholder="{{ filterExLbl }}" #input />
   </mat-form-field>
   <div class="col-6">
-    <button
-      mat-button
-      class="secondary-btn add-new-btn"
-      (click)="addNewSponsorFlag = !addNewSponsorFlag"
-    >
+    <button mat-button class="secondary-btn add-new-btn" (click)="addNewSponsorFlag = !addNewSponsorFlag">
       {{ addNewSponsorFlag ? closeLbl : addNewSponsorLbl }}
     </button>
   </div>
@@ -28,12 +16,7 @@
       <th mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ scholarshipIdLbl }}
       </th>
-      <td
-        class="scholarship-click"
-        mat-cell
-        *matCellDef="let row"
-        (click)="openScholarship(row.scholarshipId)"
-      >
+      <td class="scholarship-click" mat-cell *matCellDef="let row" (click)="openScholarship(row.scholarshipId)">
         {{ row.scholarshipId }}
       </td>
     </ng-container>
@@ -115,7 +98,7 @@
         {{ countyLbl }}
       </th>
       <td mat-cell *matCellDef="let row">
-        {{ row.criteria?.county?.join(", ") }}
+        {{ row.criteria?.county ? row.criteria.county.join(", ") : '' }}
       </td>
     </ng-container>
 
@@ -130,10 +113,7 @@
     </tr>
   </table>
 
-  <mat-paginator
-    [pageSizeOptions]="[10, 25, 100]"
-    aria-label="Select page of users"
-  ></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </div>
 
 <app-new-sponsor *ngIf="addNewSponsorFlag"></app-new-sponsor>

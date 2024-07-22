@@ -24,7 +24,7 @@ export class SingleSponsorComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.apiService
-      .sponsorDetailsApi()
+      .sponsorsDetailsApi()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (sponsorResponse: ISponsorshipDetails[]) => {
@@ -56,7 +56,7 @@ export class SingleSponsorComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           console.error(
-            'Error fetching sponsorDetailsApi in SingleSponsorComponent:',
+            'Error fetching sponsorsDetailsApi in SingleSponsorComponent:',
             error
           );
         },

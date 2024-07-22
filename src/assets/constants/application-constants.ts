@@ -1,4 +1,6 @@
 export class ApplicationConstants {
+  public static HOST_URL: string = 'http://scholarshipsphere.umd.edu';
+  // public static HOST_URL: string = 'http://127.0.0.1:5000';
   public static NA_STRING: string = 'NA';
   public static STRING: string = 'string';
   public static NUMBER: string = 'number';
